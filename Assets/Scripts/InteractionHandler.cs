@@ -24,7 +24,7 @@ public class InteractionHandler : MonoBehaviour
     [Header("misc")]
     // Heres some junk that should be in a gamemanager.
     [SerializeField] int score = 0;
-    [SerializeField] SpriteRenderer lastInteractedObjRenderer;
+    [SerializeField] GameObject exclamationMark;
 
     void Start()
     {
@@ -36,12 +36,26 @@ public class InteractionHandler : MonoBehaviour
     {
         CheckInteractables();
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             try { OnInteract(); } catch (Exception e) { print(e.GetType()); print(e.Message); print(e.StackTrace); }
         }
 
         scoreText.text = $"Score: {score}";
+
+        UpdateExclamationMark();
+
+        void UpdateExclamationMark()
+        {
+            try
+            {
+                InteractableObject interactableObject = GetNearestInteractable();
+
+                exclamationMark.transform.position = interactableObject.transform.position;
+                exclamationMark.SetActive(true);
+            }
+            catch (Exception e) { print(e.GetType()); print(e.Message); print(e.StackTrace);  exclamationMark.SetActive(false); }
+        }
     }
 
     void AddInteractable(InteractableObject interactableObject)
@@ -51,7 +65,7 @@ public class InteractionHandler : MonoBehaviour
 
     void CheckInteractables()
     {
-        foreach(InteractableObject interactableObject in interactables.ToArray())
+        foreach (InteractableObject interactableObject in interactables.ToArray())
         {
             float distance = Vector2.Distance(transform.position, interactableObject.transform.position);
             if (distance > interactableObject.detectionRange + 0.5f + longestColliderEdge)
@@ -79,7 +93,7 @@ public class InteractionHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == allowedTag)
+        if (collision.tag == allowedTag)
         {
             interactables.Add(collision.GetComponentInParent<InteractableObject>());
         }
@@ -111,7 +125,11 @@ public class InteractionHandler : MonoBehaviour
             }
         }
 
-        try { interactableObject = interactables[bestIndex]; } catch { }
+        try
+        {
+            interactableObject = interactables[bestIndex];
+        }
+        catch { }
         return interactableObject;
     }
 }
