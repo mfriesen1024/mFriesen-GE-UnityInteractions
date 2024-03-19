@@ -33,9 +33,10 @@ public class InteractableObject : MonoBehaviour
         }
     }
 
-    public void Use()
+    public bool Use()
     {
-        if(type == interactableType.collectable) { gameObject.SetActive(false); }
+        if(type == interactableType.collectable) { gameObject.SetActive(false); return true; }
+        else { return false; }
     }
 }
 

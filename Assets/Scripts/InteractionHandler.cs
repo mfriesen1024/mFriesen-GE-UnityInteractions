@@ -54,7 +54,11 @@ public class InteractionHandler : MonoBehaviour
                 exclamationMark.transform.position = interactableObject.transform.position;
                 exclamationMark.SetActive(true);
             }
-            catch (Exception e) { print(e.GetType()); print(e.Message); print(e.StackTrace);  exclamationMark.SetActive(false); }
+            catch (Exception ignored)
+            {
+                // Uncomment the line below if debugging is needed.
+                //print(e.GetType()); print(e.Message); print(e.StackTrace); exclamationMark.SetActive(false);
+            }
         }
     }
 
@@ -89,6 +93,9 @@ public class InteractionHandler : MonoBehaviour
 
         logPanel.SetActive(true); logPanel.SendMessage("ResetTimer");
 
+        score += value;
+
+        if (interactableObject.Use()) { interactables.Remove(interactableObject); }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
