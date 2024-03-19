@@ -1,11 +1,18 @@
 using System.Linq;
 using UnityEngine;
 
+enum interactableType { info, collectable}
+
 public class InteractableObject : MonoBehaviour
 {
-    [SerializeField] float detectionRange = 3;
+    public float detectionRange = 3;
     [SerializeField] string[] allowedTags = { "Player" };
     [SerializeField] string detectorTag = "InterObject";
+
+    [Header("Upon Interaction")]
+    [SerializeField] interactableType type = interactableType.info;
+    [SerializeField] string infoString;
+    [SerializeField] int collectableValue;
 
     GameObject detectorObj;
     InteractableDetector detector;
@@ -53,7 +60,7 @@ public class InteractableDetector : MonoBehaviour
         circleCollider.isTrigger = true;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision) // Hindsight, this could be done in InteractionHandler from its own ontriggerenter via GetComponentInParent iirc.
     {
         if (allowedTags.ToList().Contains(collision.gameObject.tag))
         {
