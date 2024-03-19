@@ -76,3 +76,4 @@ crashlytics-build.properties
 *.blend1.meta
 
 /Assets/Blend/output
+Assets/Blend/output.meta
