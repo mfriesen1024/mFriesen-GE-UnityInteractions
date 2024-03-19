@@ -70,5 +70,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Unwanted blender files.
 *.blend1
+*.blend1.meta
+
 /Assets/Blend/output
