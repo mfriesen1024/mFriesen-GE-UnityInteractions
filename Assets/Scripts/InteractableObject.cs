@@ -6,13 +6,13 @@ enum interactableType { info, collectable}
 public class InteractableObject : MonoBehaviour
 {
     public float detectionRange = 3;
-    [SerializeField] string[] allowedTags = { "Player" };
+    [SerializeField] string allowedTag = "Player";
     [SerializeField] string detectorTag = "InterObject";
 
     [Header("Upon Interaction")]
     [SerializeField] interactableType type = interactableType.info;
-    [SerializeField] string infoString;
-    [SerializeField] int collectableValue;
+    public string infoString = "You picked up a d20.";
+    public int collectableValue;
 
     GameObject detectorObj;
     InteractableDetector detector;
@@ -29,14 +29,13 @@ public class InteractableObject : MonoBehaviour
             detectorObj.transform.parent = transform; detectorObj.transform.position = transform.position;
 
             detector = detectorObj.AddComponent<InteractableDetector>();
-            detector.Load(this, detectionRange, allowedTags);
+            detector.Load(this, detectionRange, allowedTag);
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Use()
     {
-
+        if(type == interactableType.collectable) { gameObject.SetActive(false); }
     }
 }
 
@@ -47,25 +46,16 @@ public class InteractableDetector : MonoBehaviour
     CircleCollider2D circleCollider;
     InteractableObject interObj;
 
-    [SerializeField] string[] allowedTags;
+    [SerializeField] string allowedTag;
 
-    public void Load(InteractableObject interObj, float radius = 3, string[] allowedTags = null)
+    public void Load(InteractableObject interObj, float radius = 3, string allowedTag = null)
     {
-        this.allowedTags = allowedTags;
+        this.allowedTag = allowedTag;
         this.interObj = interObj;
 
         circleCollider = GetComponent<CircleCollider2D>();
 
         circleCollider.radius = radius;
         circleCollider.isTrigger = true;
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision) // Hindsight, this could be done in InteractionHandler from its own ontriggerenter via GetComponentInParent iirc.
-    {
-        if (allowedTags.ToList().Contains(collision.gameObject.tag))
-        {
-            // Send the parent's component to the colliding object.
-            collision.SendMessage("AddInteractable", interObj);
-        }
     }
 }
