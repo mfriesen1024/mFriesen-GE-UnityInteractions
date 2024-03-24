@@ -97,9 +97,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59896f68ee89454095f547804fb7988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 3
+  detectionRange: 1
   allowedTag: Player
   detectorTag: InterObject
   type: 0
-  infoString: This is a sign.
+  infoStrings:
+  - This is sample text.
   collectableValue: 0

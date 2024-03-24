@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class InteractionHandler : MonoBehaviour
 {
+    DialogueManager dialogueManager;
+
     [Header("Detector things")]
     [SerializeField] string allowedTag = "InterObject";
     [SerializeField] List<InteractableObject> interactables;
@@ -28,6 +30,7 @@ public class InteractionHandler : MonoBehaviour
 
     void Start()
     {
+        dialogueManager = GetComponent<DialogueManager>();
         interactables = new List<InteractableObject>();
     }
 
@@ -39,6 +42,8 @@ public class InteractionHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             try { OnInteract(); } catch (Exception e) { print(e.GetType()); print(e.Message); print(e.StackTrace); }
+
+            dialogueManager.UpdateDialogue();
         }
 
         scoreText.text = $"Score: {score}";
@@ -84,16 +89,10 @@ public class InteractionHandler : MonoBehaviour
         InteractableObject interactableObject;
         interactableObject = GetNearestInteractable();
 
-        string msg = interactableObject.infoString;
-        int value = interactableObject.collectableValue;
-        Sprite logIconSprite = interactableObject.GetComponent<SpriteRenderer>().sprite;
+        // This is wrong, but due to time issues, this will not be fixed.
+        if(dialogueManager.Queue.Count == 0 || interactableObject.type != interactableType.dialogue) { dialogueManager.LoadNewDialogue(interactableObject); }
 
-        logIcon.sprite = logIconSprite;
-        logText.text = msg;
-
-        logPanel.SetActive(true); logPanel.SendMessage("ResetTimer");
-
-        score += value;
+        score += interactableObject.collectableValue;
 
         if (interactableObject.Use()) { interactables.Remove(interactableObject); }
     }

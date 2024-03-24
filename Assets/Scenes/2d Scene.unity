@@ -29216,6 +29216,7 @@ GameObject:
   - component: {fileID: 1401688531}
   - component: {fileID: 1401688529}
   - component: {fileID: 1401688532}
+  - component: {fileID: 1401688533}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -29350,6 +29351,21 @@ MonoBehaviour:
   logIcon: {fileID: 1834273198}
   score: 0
   exclamationMark: {fileID: 98467948}
+--- !u!114 &1401688533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401688527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d58339b246037449a6cf867f5eb9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logText: {fileID: 890476878}
+  logIcon: {fileID: 1834273198}
+  autoHide: {fileID: 1455671261}
 --- !u!1 &1455671257
 GameObject:
   m_ObjectHideFlags: 0
@@ -29440,6 +29456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d29d453ff573040835928c280b2144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shouldHide: 0
   timeToHide: 3
 --- !u!1001 &1471879304
 PrefabInstance:
@@ -29473,6 +29490,11 @@ PrefabInstance:
         type: 3}
       propertyPath: collectableValue
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3210071345556752592, guid: 84003e153f81cd24ea219a4ac1ada617,
+        type: 3}
+      propertyPath: infoStrings.Array.data[0]
+      value: This is a sign.
       objectReference: {fileID: 0}
     - target: {fileID: 4732137735505886912, guid: 84003e153f81cd24ea219a4ac1ada617,
         type: 3}
@@ -29918,6 +29940,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: AnimatedInteractableObject
       objectReference: {fileID: 0}
+    - target: {fileID: 3210071345556752592, guid: 84003e153f81cd24ea219a4ac1ada617,
+        type: 3}
+      propertyPath: infoStrings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3210071345556752592, guid: 84003e153f81cd24ea219a4ac1ada617,
+        type: 3}
+      propertyPath: infoStrings.Array.data[1]
+      value: Erm, why are you still thinking about the d20?
+      objectReference: {fileID: 0}
     - target: {fileID: 6864707593341429494, guid: 84003e153f81cd24ea219a4ac1ada617,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29981,6 +30013,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 91466070}
     m_Modifications:
+    - target: {fileID: 1402335004085555513, guid: 966e42f6bca3eb246b8a0e2c82282b8d,
+        type: 3}
+      propertyPath: type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402335004085555513, guid: 966e42f6bca3eb246b8a0e2c82282b8d,
+        type: 3}
+      propertyPath: infoStrings.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402335004085555513, guid: 966e42f6bca3eb246b8a0e2c82282b8d,
+        type: 3}
+      propertyPath: infoStrings.Array.data[0]
+      value: This is a dialogue sign.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402335004085555513, guid: 966e42f6bca3eb246b8a0e2c82282b8d,
+        type: 3}
+      propertyPath: infoStrings.Array.data[1]
+      value: It traps the player while "speaking".
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402335004085555513, guid: 966e42f6bca3eb246b8a0e2c82282b8d,
+        type: 3}
+      propertyPath: infoStrings.Array.data[2]
+      value: Though in this case, it'd be more accurate to say while the player is
+        reading it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402335004085555513, guid: 966e42f6bca3eb246b8a0e2c82282b8d,
+        type: 3}
+      propertyPath: infoStrings.Array.data[3]
+      value: When the final text element is displayed, the player can walk away.
+      objectReference: {fileID: 0}
     - target: {fileID: 4301435860368920944, guid: 966e42f6bca3eb246b8a0e2c82282b8d,
         type: 3}
       propertyPath: m_Name

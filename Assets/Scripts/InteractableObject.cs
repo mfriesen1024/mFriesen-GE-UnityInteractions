@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-enum interactableType { info, collectable}
+public enum interactableType { info, collectable, dialogue}
 
 public class InteractableObject : MonoBehaviour
 {
@@ -10,8 +10,8 @@ public class InteractableObject : MonoBehaviour
     [SerializeField] string detectorTag = "InterObject";
 
     [Header("Upon Interaction")]
-    [SerializeField] interactableType type = interactableType.info;
-    public string infoString = "You picked up a d20.";
+    public interactableType type = interactableType.info;
+    public string[] infoStrings = { "You picked up a d20." };
     public int collectableValue;
 
     GameObject detectorObj;
